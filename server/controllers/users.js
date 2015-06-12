@@ -19,21 +19,39 @@ module.exports = (function() {
 			}
 			var errors = validate(req.body, contraints);
 			if(errors !== undefined) {
+				if(errors.email){
+					errors.email = "Email is not valid.";
+				}
 				errors.errors = true;
 				res.json(errors);
 			}
 			else{
-				var temp = req.body;
-				temp.created_at = moment().format();
-				temp.first_name = temp.first_name[0].toUpperCase() + temp.first_name.substr(1);
-				temp.last_name = temp.last_name[0].toUpperCase() + temp.last_name.substr(1);
-				var user = new User(req.body);
-				user.save(function(err, saveResults){
+				var search = req.body.email.toLowerCase();
+				User.findOne({email: search}, function(err, findResults){
 					if(err){
 						console.log(err);
 					}
 					else{
-						res.json(saveResults);
+						if(findResults){
+							var errors = {email: "That email is already registered", errors: true};
+							res.json(errors);
+						}
+						else{
+							var temp = req.body;
+							temp.created_at = moment().format();
+							temp.first_name = temp.first_name[0].toUpperCase() + temp.first_name.substr(1);
+							temp.last_name = temp.last_name[0].toUpperCase() + temp.last_name.substr(1);
+							temp.email = temp.email.toLowerCase();
+							var user = new User(req.body);
+							user.save(function(err, saveResults){
+								if(err){
+									console.log(err);
+								}
+								else{
+									res.json(saveResults);
+								}
+							});
+						}
 					}
 				});
 			}

@@ -46,7 +46,7 @@
                         }
                         if(res.email){
                              $("#email").fadeOut(function(){
-                                $('#email').html("Email is not valid.");
+                                $('#email').html(res.email);
                                 $('#email').addClass("red");
                                 $("#email").fadeIn();
                             });
@@ -142,7 +142,7 @@
                         <a class="page-scroll" href="#about" style="text-shadow: 2px 2px #000000">About</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#download" style="text-shadow: 2px 2px #000000">Sign Up</a>
+                        <a class="page-scroll" href="#sign_up" style="text-shadow: 2px 2px #000000">Sign Up</a>
                     </li>
                    <!--  <li>
                         <a class="page-scroll" href="#contact">Contact</a>
@@ -164,7 +164,6 @@
                         <p class="intro-text">UBER Rides for All.<br></p>
                         <a href="#about" class="btn page-scroll" style="border: 1px solid lightgray; font-size: 20px">How It Works</a>
                             <!-- <i class="fa fa-angle-double-down animated"></i> -->
-                        </a>
                     </div>
                 </div>
             </div>
@@ -189,11 +188,12 @@
             </div>
 
         </div>
+        <div style="margin-bottom: 7%;"> </div>
     </section>
 
     <!-- Sign Up Section -->
-    <section id="download" class="content-section text-center">
-        <div class="download-section">
+    <section id="sign_up" class="content-section text-center download-section">
+        <div>
             <div class="container">
                 <div class="col-lg-8 col-lg-offset-2">
                     <h2 id="signUp" style="text-shadow: 3px 3px #000000">Sign up for Updates on Textber</h2>
