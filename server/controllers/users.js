@@ -39,9 +39,9 @@ module.exports = (function() {
 						else{
 							var temp = req.body;
 							temp.created_at = moment().format();
-							temp.first_name = temp.first_name[0].toUpperCase() + temp.first_name.substr(1);
-							temp.last_name = temp.last_name[0].toUpperCase() + temp.last_name.substr(1);
-							temp.email = temp.email.toLowerCase();
+							temp.first_name = encodeURI(temp.first_name[0].toUpperCase() + temp.first_name.substr(1));
+							temp.last_name = encodeURI(temp.last_name[0].toUpperCase() + temp.last_name.substr(1));
+							temp.email = encodeURI(temp.email.toLowerCase());
 							var user = new User(req.body);
 							user.save(function(err, saveResults){
 								if(err){
