@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<title>Uber App</title>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			// function repeat(){
+			$("#asdf").submit(function(response){
+				console.log("here");
+				$("#getdata").html("<p>Ride Status: " + response.status, + "<br>Lat: " + response.latitude + "<br>Long: " + response.longitude + "<br>ETA: " + response.eta + "min</p>");
+			});
+			// }
+			$.get('/currentRide', function(response) {
+				console.log(response);
+				$("#getdata").html("<p>Ride Status: " + response.status + "<br>Lat: " + response.location.latitude + "<br>Long: " + response.location.longitude + "<br>ETA: " + response.eta + " minute</p>");
+			});
+
+			$.post('/changeStatus', {status: 'accepted'}, function(req, res){
+				$.get('/currentRide', function(response) {
+					console.log(response);
+				});
+			});
+			// setInterval(function(){ repeat() }, 5000);
+		});
+	
+	</script>
+</head>
+<body>
+	<h2>Welcome to the trip tracker</h2>
+	<h3 id="getdata"></h3>
+	<form id="asdf" action="/currentRide" method="GET">
+	</form>
+</body>
+</html>
